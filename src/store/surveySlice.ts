@@ -15,7 +15,7 @@ interface SurveyState {
 }
 
 const initialState: SurveyState = {
-  title: "",
+  title: "제목이 없는 설문지입니다.",
   description: "",
   questions: [],
 };
