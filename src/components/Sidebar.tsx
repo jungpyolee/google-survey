@@ -9,13 +9,15 @@ const Sidebar: React.FC = () => {
   const handleAddQuestion = () => {
     const newQuestion: Question = {
       id: Date.now().toString(),
-      type: "multiple-choice", // 기본 타입
+      type: "multiple-choice", //
+      text: "",
+      isRequired: false,
       index: 0,
       options: ["옵션 1"],
       isEtc: false,
     };
 
-    dispatch(addQuestion(newQuestion));
+    dispatch(addQuestion(newQuestion)); // 질문 추가 액션 디스패치
     // 스크롤 위치를 최하단으로 이동
     setTimeout(() => {
       window.scrollTo({
