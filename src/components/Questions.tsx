@@ -265,7 +265,7 @@ const Questions: React.FC = () => {
                     >
                       옵션 추가
                     </button>
-                    {!question.isEtc && (
+                    {!question.isEtc && question.type !== "dropdown" && (
                       <div className="flex gap-2">
                         <span>또는</span>
                         <button
