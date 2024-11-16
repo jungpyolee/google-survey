@@ -46,6 +46,20 @@ const surveySlice = createSlice({
     addQuestion: (state, action: PayloadAction<Question>) => {
       state.questions.push(action.payload);
     },
+    copyQuestion: (state, action: PayloadAction<string>) => {
+      // 복사할 질문은 그대로 들어오는것으로가정하고 현재 질문의 인덱스 바로 다음에 추가
+      let id = Date.now().toString();
+
+      const index = state.questions.findIndex((q) => q.id === action.payload);
+      if (index !== -1) {
+        const question = state.questions[index];
+        state.questions.splice(index + 1, 0, {
+          ...question,
+          id,
+        });
+      }
+      return state;
+    },
     removeQuestion: (state, action: PayloadAction<string>) => {
       state.questions = state.questions.filter((q) => q.id !== action.payload);
     },
@@ -105,6 +119,12 @@ const surveySlice = createSlice({
         question.type = action.payload.type;
       }
     },
+    clearSurvey: (state) => {
+      state.title = "";
+      state.description = "";
+      state.questions = [];
+    },
+    submitSurvey: (state) => {},
   },
 });
 
@@ -112,12 +132,15 @@ export const {
   setTitle,
   setDescription,
   addQuestion,
+  copyQuestion,
   removeQuestion,
   updateQuestion,
   addOption,
   addEtcOption,
   removeOption,
   changeType,
+  clearSurvey,
+  submitSurvey,
 } = surveySlice.actions;
 
 export default surveySlice.reducer;
