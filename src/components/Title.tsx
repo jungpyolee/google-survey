@@ -62,7 +62,6 @@ const Title: React.FC = () => {
           )}
         ></div>
       </div>
-      {/* 설문지 설명 */}
     </div>
   );
 };

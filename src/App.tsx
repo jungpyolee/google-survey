@@ -16,7 +16,6 @@ const App: React.FC = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <div className="App min-h-screen bg-violet-100">
-          {/* 라우팅 */}
           <Router>
             <Routes>
               <Route path="/" element={<Navigate to="/edit" />} />
