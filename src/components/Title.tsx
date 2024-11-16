@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { setDescription, setTitle } from "../store/surveySlice";
 import TextareaAutosize from "react-textarea-autosize";
+import clsx from "clsx";
 
 const Title: React.FC = () => {
   const [titleFocused, setTitleFocused] = useState(false);
@@ -39,7 +40,10 @@ const Title: React.FC = () => {
           onBlur={() => setTitleFocused(false)}
         />
         <div
-          className={`h-0.5 bg-violet-600 ${titleFocused ? "animate-expand" : "bg-gray-200"}`}
+          className={clsx(
+            "h-0.5",
+            titleFocused ? "animate-expand bg-violet-600" : "bg-gray-200",
+          )}
         ></div>
         <TextareaAutosize
           className="mt-4 w-full resize-none text-sm focus:outline-none focus:ring-0"
@@ -52,7 +56,10 @@ const Title: React.FC = () => {
           onBlur={() => setDescriptionFocused(false)}
         />
         <div
-          className={`h-0.5 bg-violet-600 ${descriptionFocused ? "animate-expand" : "bg-gray-200"}`}
+          className={clsx(
+            "h-0.5",
+            descriptionFocused ? "animate-expand bg-violet-600" : "bg-gray-200",
+          )}
         ></div>
       </div>
       {/* 설문지 설명 */}
