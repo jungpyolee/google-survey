@@ -22,7 +22,7 @@ const initialState: SurveyState = {
   description: "",
   questions: [
     {
-      id: "1",
+      id: Date.now().toString(),
       type: "multiple-choice",
       text: "",
       isRequired: false,
