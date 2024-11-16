@@ -1,27 +1,14 @@
-// 제출버튼 왼쪽에, 오른쪽엔 양식지우기 버튼을 만들어주세요.
-
 import React from "react";
-import { useDispatch } from "react-redux";
-import { clearSurvey } from "../store/surveySlice";
-import { submitSurvey } from "../store/surveySlice";
 import { Button } from "@mui/material";
 
-const Bottombar: React.FC = () => {
-  const dispatch = useDispatch();
+interface BottombarProps {
+  handleSubmit: React.FormEventHandler<HTMLButtonElement>;
+  handleClear: () => void;
+}
 
-  const handleSubmit = () => {
-    dispatch(submitSurvey());
-  };
-
-  const handleClear = () => {
-    // 컨펌 한번하기
-    if (window.confirm("정말로 양식을 지우시겠습니까?")) {
-      dispatch(clearSurvey());
-    }
-  };
-
+const Bottombar: React.FC<BottombarProps> = ({ handleSubmit, handleClear }) => {
   return (
-    <div className="mt-4 flex items-center justify-between">
+    <div className="mx-auto mt-4 flex max-w-3xl items-center justify-between px-4">
       <Button
         variant="contained"
         color="primary"
