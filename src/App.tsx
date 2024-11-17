@@ -7,8 +7,8 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import Edit from "./pages/Edit";
-import ViewForm from "./pages/Viewform";
+import EditPage from "./pages/Edit";
+import ViewFormPage from "./pages/Viewform";
 import { PersistGate } from "redux-persist/integration/react";
 
 const App: React.FC = () => {
@@ -19,8 +19,8 @@ const App: React.FC = () => {
           <Router>
             <Routes>
               <Route path="/" element={<Navigate to="/edit" />} />
-              <Route path="/edit" element={<Edit />} />
-              <Route path="/viewform" element={<ViewForm />} />
+              <Route path="/edit" element={<EditPage />} />
+              <Route path="/viewform" element={<ViewFormPage />} />
             </Routes>
           </Router>
         </div>
