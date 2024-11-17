@@ -1,11 +1,11 @@
 import React from "react";
 import Title from "../components/Title";
-import Questions from "../components/Questions";
+import Questions from "../components/Question/Questions";
 import Sidebar from "../components/Sidebar";
 import { RemoveRedEye } from "@mui/icons-material";
 import { Button, Link } from "@mui/material";
 
-const Edit: React.FC = () => {
+const EditPage: React.FC = () => {
   return (
     <div className="w-full bg-violet-100 p-8 md:mx-auto md:w-1/2">
       <div className="flex justify-end pb-1">
@@ -28,4 +28,4 @@ const Edit: React.FC = () => {
   );
 };
 
-export default Edit;
+export default EditPage;
