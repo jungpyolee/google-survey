@@ -66,15 +66,21 @@ const surveySlice = createSlice({
     addOption: (state, action: PayloadAction<string>) => {
       const question = state.questions.find((q) => q.id === action.payload);
       if (question) {
+        // options가 undefined인 경우 빈 배열로 초기화
+        if (!question.options) {
+          question.options = [];
+        }
+
         if (question.isEtc) {
           // 기타 옵션을 추가하는 경우 기타옵션을 항상 마지막인덱스로 유지하기 위해 끝에서 두번째에 추가
-
-          question.options?.splice(question.options.length - 1, 0, "");
+          question.options.splice(question.options.length - 1, 0, "");
         } else {
-          question.options?.push(`옵션 ${question.options.length + 1}`);
+          // 기본 옵션 추가
+          question.options.push(`옵션 ${question.options.length + 1}`);
         }
       }
     },
+
     addEtcOption: (state, action: PayloadAction<string>) => {
       const question = state.questions.find((q) => q.id === action.payload);
       if (question) {
