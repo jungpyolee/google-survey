@@ -117,6 +117,7 @@ const surveySlice = createSlice({
       const question = state.questions.find((q) => q.id === action.payload.id);
       if (question) {
         question.type = action.payload.type;
+        question.isEtc = false;
       }
     },
     clearSurvey: (state) => {
@@ -125,6 +126,37 @@ const surveySlice = createSlice({
       state.questions = [];
     },
     submitSurvey: (state) => {},
+    moveQuestion: (
+      state,
+      action: PayloadAction<{ sourceIndex: number; destinationIndex: number }>,
+    ) => {
+      const { sourceIndex, destinationIndex } = action.payload;
+      const [removed] = state.questions.splice(sourceIndex, 1);
+
+      const updatedQuestions = [
+        ...state.questions.slice(0, destinationIndex),
+        removed,
+        ...state.questions.slice(destinationIndex),
+      ];
+
+      state.questions = updatedQuestions;
+    },
+    moveOption: (
+      state,
+      action: PayloadAction<{
+        questionId: string;
+        sourceIndex: number;
+        destinationIndex: number;
+      }>,
+    ) => {
+      const { questionId, sourceIndex, destinationIndex } = action.payload;
+      const question = state.questions.find((q) => q.id === questionId);
+
+      if (question) {
+        const [removed] = question.options.splice(sourceIndex, 1);
+        question.options.splice(destinationIndex, 0, removed);
+      }
+    },
   },
 });
 
@@ -141,6 +173,8 @@ export const {
   changeType,
   clearSurvey,
   submitSurvey,
+  moveQuestion,
+  moveOption,
 } = surveySlice.actions;
 
 export default surveySlice.reducer;
