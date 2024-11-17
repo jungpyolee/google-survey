@@ -11,9 +11,16 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
-import { changeType, Question, updateQuestion } from "../../store/surveySlice";
+import {
+  changeType,
+  Question,
+  setFocusedQuestion,
+  updateQuestion,
+} from "../../store/surveySlice";
 import { useDispatch } from "react-redux";
 import clsx from "clsx";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 type QuestionType =
   | "short-answer"
@@ -29,6 +36,10 @@ const QuestionItem: React.FC<{
   const dispatch = useDispatch();
   const [isFocused, setIsFocused] = useState(false);
   const [isTitleFocused, setIsTitleFocused] = useState(false);
+
+  const focusedQuestion = useSelector(
+    (state: RootState) => state.survey.focusedQuestion,
+  );
   // Handle text changes
   const handleTextChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,8 +66,9 @@ const QuestionItem: React.FC<{
     <Draggable key={question.id} draggableId={question.id} index={index}>
       {(provided) => (
         <div
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={() => {
+            dispatch(setFocusedQuestion(question.id));
+          }}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -129,9 +141,11 @@ const QuestionItem: React.FC<{
           {(question.type === "multiple-choice" ||
             question.type === "dropdown" ||
             question.type === "checkbox") &&
-            isFocused && <QuestionFooter question={question} />}
+            question.id === focusedQuestion && (
+              <QuestionFooter question={question} />
+            )}
 
-          {isFocused && <QuestionControls question={question} />}
+          {focusedQuestion && <QuestionControls question={question} />}
         </div>
       )}
     </Draggable>

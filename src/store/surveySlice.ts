@@ -15,6 +15,7 @@ interface SurveyState {
   title: string;
   description: string;
   questions: Question[];
+  focusedQuestion: string | null;
 }
 
 const initialState: SurveyState = {
@@ -31,6 +32,7 @@ const initialState: SurveyState = {
       isEtc: false,
     },
   ],
+  focusedQuestion: null,
 };
 
 const surveySlice = createSlice({
@@ -163,6 +165,9 @@ const surveySlice = createSlice({
         question.options.splice(destinationIndex, 0, removed);
       }
     },
+    setFocusedQuestion: (state, action: PayloadAction<string | null>) => {
+      state.focusedQuestion = action.payload;
+    },
   },
 });
 
@@ -181,6 +186,7 @@ export const {
   submitSurvey,
   moveQuestion,
   moveOption,
+  setFocusedQuestion,
 } = surveySlice.actions;
 
 export default surveySlice.reducer;
