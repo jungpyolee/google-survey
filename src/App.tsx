@@ -15,7 +15,7 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <div className="App min-h-screen bg-violet-100">
+        <div className="App min-h-screen bg-violet-100 pb-40">
           <Router>
             <Routes>
               <Route path="/" element={<Navigate to="/edit" />} />
