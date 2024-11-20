@@ -1,6 +1,5 @@
 # 설치 및 실행방법
 
-    classum-leejungpyo-survey 폴더로 이동후
     1. npm install
     2. npm start
 
